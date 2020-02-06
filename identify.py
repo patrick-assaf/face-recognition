@@ -1,10 +1,10 @@
 import face_recognition
 from PIL import Image, ImageDraw
 
-obama_image = face_recognition.load_image_file('./img/known/barack-obama.jpg')
+obama_image = face_recognition.load_image_file('./img/known/pat.jpg')
 obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 
-trump_image = face_recognition.load_image_file('./img/known/donald-trump.jpg')
+trump_image = face_recognition.load_image_file('./img/known/tony.jpg')
 trump_face_encoding = face_recognition.face_encodings(trump_image)[0]
 
 # Create an array of encodings and names
@@ -14,12 +14,12 @@ known_face_encodings = [
 ]
 
 known_face_names = [
-    "Barack Obama",
-    "Donald Trump"
+    "Patrick",
+    "Anthony"
 ]
 
 # Load test image to find faces in 
-test_image = face_recognition.load_image_file('./img/groups/obama-and-trump.jpg')
+test_image = face_recognition.load_image_file('./img/groups/pat-tony.jpg')
 
 # Find faces in test image
 face_locations = face_recognition.face_locations(test_image)
@@ -33,7 +33,7 @@ draw = ImageDraw.Draw(pil_image)
 
 # Loop through faces in test image
 for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
-    matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
+    matches = face_recognition.compare_faces(known_face_encodings, face_encoding, 0.45)
 
     name = "Unknown Person"
 
